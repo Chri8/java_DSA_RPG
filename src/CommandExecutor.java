@@ -2,18 +2,23 @@ import javax.swing.JTextArea;
 
 public class CommandExecutor {
 	JTextArea jta;
+	private Command lock = null; // Command which locks the input to itself until end of execution
 	public void executeCommandStack(CommandStack commStack){
-		if (commStack.getMainCommand()!=null){
+	
+		if (commStack.getCommStackSize()>0){
 			switch(commStack.getMainCommand()){
-			case "create": printOut("i will create "+commStack.getCommandArgumentsAsString());break;
-			case "delete": printOut("i will delete "+commStack.getCommandArgumentsAsString());break;
-			default:printOut("i dont know this command: "+commStack.getMainCommand());
+			case "create":
+				CreateCommand crcomm= new CreateCommand(commStack.getCommandArgumentsList());
+				this.lock = crcomm.execute().command;
 			}
+				
 		}
 		else{
 			printOut("Command Stack is Empty, nothing to execute");
 		}
 	}
+	private void setLock(Command c){this.lock = c;}
+
 	public void setLoggingFacility(JTextArea jt){
 		this.jta = jt;
 	};
