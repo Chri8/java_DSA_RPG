@@ -57,5 +57,8 @@ public class CommandStack {
 
 		return commandArguments;
 	}
+	public ArrayList<String> getCommandList(){
+		return commandStack;
+	}
 
 }

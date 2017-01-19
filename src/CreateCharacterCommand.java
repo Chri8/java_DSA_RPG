@@ -9,8 +9,15 @@ public class CreateCharacterCommand extends AbstractCommand {
 
 	@Override
 	public CallBack execute() {
-		// TODO Auto-generated method stub
-		return null;
+		if (this.commands.size()>0){
+			this.cb = new CallBack();
+			this.cb.command = this;
+			this.cb.closeOnItself=false;
+			this.cb.question="create character command execution end";
+
+		}
+		return cb;
 	}
+
 
 }
